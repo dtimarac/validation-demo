@@ -25,9 +25,9 @@ public class MyController {
     }
 
     @GetMapping
-    public VendQueue processRequest(MyDto myDto) {
+    public VendQueue processRequest(CloudDbResultset cloudDbResultset) {
 
-        CloudVend cloudVend = createVendCommand(myDto);
+        CloudVend cloudVend = createVendCommand(cloudDbResultset);
         try {
             VendQueue vendQueue = vendImporterService.createVendQueue(cloudVend);
             return vendQueue;
@@ -42,11 +42,11 @@ public class MyController {
         }
     }
 
-    private CloudVend createVendCommand(MyDto myDto) {
+    private CloudVend createVendCommand(CloudDbResultset cloudDbResultset) {
         return new CloudVend(
-                myDto.getParamStr(),
-                myDto.getParamInt() != null ? NumberUtils.parseNumber(myDto.getParamInt(), Integer.class) : null,
-                myDto.getParamLong() != null ? NumberUtils.parseNumber(myDto.getParamLong(), Long.class) : null
+                cloudDbResultset.getParamStr(),
+                cloudDbResultset.getParamInt() != null ? NumberUtils.parseNumber(cloudDbResultset.getParamInt(), Integer.class) : null,
+                cloudDbResultset.getParamLong() != null ? NumberUtils.parseNumber(cloudDbResultset.getParamLong(), Long.class) : null
         );
     }
 }

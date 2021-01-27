@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyDto {
+public class CloudDbResultset {
 
     private String paramStr;
 
